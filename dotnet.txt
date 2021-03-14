@@ -1,0 +1,39 @@
+dotnet new console
+dotnet build -c Release
+dotnet add bgpq3 package SSH.NET
+dotnet add ap_discovery package Newtonsoft.Json
+dotnet publish -r linux-x64 /p:PublishSingleFile=true -??????? ?????????? ? ????? ????? (.pdb ?? ?????), ??? ??????? ?? ??????????? ??????? dotnet
+dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained false -??????? ?????????? ? ????? ????? (.pdb ?? ?????), ??? ??????? ??????????? ?????????????? ? ??????? dotnet
+
+
+https://www.radb.net/query?advanced_query=1&keywords=AS-MULTIHOSTMSK&-T+option=&ip_lookup=1&ip_option=-M&-i+option=members
+https://www.radb.net/query?advanced_query=1&keywords=AS56784&-T+option=&ip_option=-M&-i=1&-i+option=origin
+
+
+
+INTALL:
+	
+1. wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+2. sudo dpkg -i packages-microsoft-prod.deb
+3. runtime (for launching only):
+  sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-5.0
+  [sudo apt-get install -y dotnet-sdk-3.1]
+4. SDK (for creating projects)
+  sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+  [sudo apt-get install -y dotnet-sdk-3.1]
+5. sudo apt-get install -y dotnet-runtime-5.0
+6. Visual studio code:
+	wget https://go.microsoft.com/fwlink/?LinkID=760868 -O code.deb
+	apt install ./code.deb
+	
+  
+
+
+
+

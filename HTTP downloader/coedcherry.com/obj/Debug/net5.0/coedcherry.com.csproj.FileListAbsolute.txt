@@ -1,0 +1,16 @@
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/coedcherry.com
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/coedcherry.com.deps.json
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/coedcherry.com.runtimeconfig.json
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/coedcherry.com.runtimeconfig.dev.json
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/coedcherry.com.dll
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/ref/coedcherry.com.dll
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/coedcherry.com.pdb
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.csprojAssemblyReference.cache
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.GeneratedMSBuildEditorConfig.editorconfig
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.AssemblyInfoInputs.cache
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.AssemblyInfo.cs
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.csproj.CoreCompileInputs.cache
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.dll
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/ref/coedcherry.com.dll
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.pdb
+/home/alexander/C#/HTTP downloader/coedcherry.com/obj/Debug/net5.0/coedcherry.com.genruntimeconfig.cache

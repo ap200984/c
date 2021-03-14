@@ -1,0 +1,16 @@
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.csprojAssemblyReference.cache
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.GeneratedMSBuildEditorConfig.editorconfig
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.AssemblyInfoInputs.cache
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.AssemblyInfo.cs
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.csproj.CoreCompileInputs.cache
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/csv2vcf
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/csv2vcf.deps.json
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/csv2vcf.runtimeconfig.json
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/csv2vcf.runtimeconfig.dev.json
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/csv2vcf.dll
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/ref/csv2vcf.dll
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/bin/Debug/net5.0/csv2vcf.pdb
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.dll
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/ref/csv2vcf.dll
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.pdb
+/home/alexander/ownCloud/a.popov/C#/csv2vcf/obj/Debug/net5.0/csv2vcf.genruntimeconfig.cache

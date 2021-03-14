@@ -1,0 +1,101 @@
+using System.Collections.Generic;
+using System.Text.Json;
+
+namespace ap_discovery
+{
+    public class cStation
+    {
+        public string MAC;
+        public string Name;
+        public string LastIP;
+        public string TX;
+        public string RX;
+        public string Signal;
+        public string CCQ;
+        public string Uptime;
+        public string Distance;
+        public string TXPower;
+        public string Noisefloor;
+        public string AirMAX_Priority;
+        public string AirMAX_Quality;
+        public string AirMAX_Signal;
+        public string AirMAX_Capacity;
+
+        public string GetJSON()
+        {
+            string s="\t{\n";
+            s+="\t\t\"{#MAC}\": \""+MAC+"\",\n";
+            s+="\t\t\"{#NAME}\": \""+Name+"\",\n";
+            s+="\t\t\"{#LASTIP}\": \""+LastIP+"\",\n";
+            s+="\t\t\"{#TX}\": \""+TX+"\",\n";
+            s+="\t\t\"{#RX}\": \""+RX+"\",\n";
+            s+="\t\t\"{#SIGNAL}\": \""+Signal+"\",\n";
+            s+="\t\t\"{#CCQ}\": \""+CCQ+"\",\n";
+            s+="\t\t\"{#UPTIME}\": \""+Uptime+"\",\n";
+            s+="\t\t\"{#DISTANCE}\": \""+Distance+"\",\n";
+            s+="\t\t\"{#TXPOWER}\": \""+TXPower+"\",\n";
+            s+="\t\t\"{#NOISEFLOOR}\": \""+Noisefloor+"\",\n";
+            s+="\t\t\"{#AIRMAX_PRIORITY}\": \""+AirMAX_Priority+"\",\n";
+            s+="\t\t\"{#AIRMAX_QUALITY}\": \""+AirMAX_Quality+"\",\n";
+            s+="\t\t\"{#AIRMAX_SIGNAL}\": \""+AirMAX_Signal+"\",\n";
+            s+="\t\t\"{#AIRMAX_CAPACITY}\": \""+AirMAX_Capacity+"\"\n";
+            s+="\t},\n";
+            return s;
+        }
+    }
+
+    public class cAPDiscovery
+    {
+        public List<cStation> Stations;
+
+        public string GetJSON()
+        {
+            string s="\"data\": [\n";
+            foreach (cStation S in Stations)
+                s+=S.GetJSON();
+            
+            s=s.Substring(0,s.Length-2); //delete last ","
+            s+="\n]";
+
+            return s;        
+        }
+
+        public cAPDiscovery(string RawText)
+        {
+            Stations = new List<cStation>();
+            string[] lines = RawText.Split(new [] { '\r', '\n' });
+            for (int i=0; i<lines.Length; i++)
+            {
+                if (lines[i]=="\t{") //new station block beginning
+                {
+                    cStation Station = new cStation();
+                    Station.MAC = lines[i+1].Split(": ")[1].Split("\"")[1];
+                    Station.Name = lines[i+2].Split(":")[1].Split("\"")[1];
+                    Station.LastIP = lines[i+3].Split(":")[1].Split("\"")[1];
+                    Station.TX = lines[i+6].Split(" : ")[1].Split(",")[0];
+                    Station.RX = lines[i+7].Split(" : ")[1].Split(",")[0];
+                    Station.Signal = lines[i+8].Split(" : ")[1].Split(",")[0];
+                    Station.CCQ = lines[i+9].Split(" : ")[1].Split(",")[0];
+                    Station.Uptime = lines[i+11].Split(" : ")[1].Split(",")[0];
+                    Station.Distance = lines[i+13].Split(" : ")[1].Split(",")[0];
+                    Station.TXPower = lines[i+14].Split(" : ")[1].Split(",")[0];
+                    Station.Noisefloor = lines[i+15].Split(" : ")[1].Split(",")[0];
+                    Station.AirMAX_Priority = lines[i+17].Split(" : ")[1].Split(",")[0];
+                    Station.AirMAX_Quality = lines[i+18].Split(" : ")[1].Split(",")[0];
+                    Station.AirMAX_Signal = lines[i+20].Split(" : ")[1].Split(",")[0];
+                    Station.AirMAX_Capacity = lines[i+21].Split(" : ")[1].Split(",")[0].Split(" ")[0];                    
+                    Stations.Add(Station);
+                    i+=21;                    
+                }              
+            }
+
+
+
+        }
+
+
+    }
+
+
+
+}

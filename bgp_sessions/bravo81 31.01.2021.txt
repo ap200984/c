@@ -1,0 +1,1063 @@
+set groups re-protect interfaces lo0 unit <*> family inet filter input self-protect
+set groups arp-policer interfaces <ae*> unit <*> family inet policer arp ARP-Policer
+set groups arp-policer interfaces <xe-*/*/*> unit <*> family inet policer arp ARP-Policer
+set chassis aggregated-devices ethernet device-count 4
+set chassis fpc 0 pic 0 tunnel-services bandwidth 10g
+set chassis alarm management-ethernet link-down ignore
+set interfaces apply-groups arp-policer
+set interfaces lt-0/0/0 unit 0 description "<< l3 mirroring interface from bravo81 >>"
+set interfaces lt-0/0/0 unit 0 encapsulation vlan
+set interfaces lt-0/0/0 unit 0 vlan-id 1481
+set interfaces lt-0/0/0 unit 0 peer-unit 1
+set interfaces lt-0/0/0 unit 0 family inet policer input lim2m
+set interfaces lt-0/0/0 unit 0 family inet policer output lim2m
+set interfaces lt-0/0/0 unit 0 family inet address 10.0.81.253/30
+set interfaces lt-0/0/0 unit 1 description "<< l2circuit to bravo92 for mirroring >>"
+set interfaces lt-0/0/0 unit 1 encapsulation vlan-ccc
+set interfaces lt-0/0/0 unit 1 vlan-id 1481
+set interfaces lt-0/0/0 unit 1 peer-unit 0
+set interfaces xe-0/0/0 description "<< 1 GE to Bravo92 xe-5/3/0/ via Rascom >>"
+set interfaces xe-0/0/0 vlan-tagging
+set interfaces xe-0/0/0 mtu 9100
+set interfaces xe-0/0/0 encapsulation flexible-ethernet-services
+set interfaces xe-0/0/0 unit 928 description "<< Link between Bravo81 and Bravo92 >>"
+set interfaces xe-0/0/0 unit 928 bandwidth 2500000000
+set interfaces xe-0/0/0 unit 928 vlan-id 928
+set interfaces xe-0/0/0 unit 928 family inet address 10.10.89.10/30
+set interfaces xe-0/0/0 unit 928 family inet6 rpf-check mode loose
+set interfaces xe-0/0/0 unit 928 family inet6 address 2a0a:4180::f/127
+set interfaces xe-0/0/0 unit 928 family mpls
+set interfaces xe-0/0/1 description "<< 10GE ae0 to foxtrot83 xe-1/1/0 >>"
+set interfaces xe-0/0/1 gigether-options 802.3ad ae0
+set interfaces xe-0/0/2 description "<< 10GE ae0 to foxtrot83 xe-0/1/0 >>"
+set interfaces xe-0/0/2 gigether-options 802.3ad ae0
+set interfaces xe-0/0/3 description " << 10 GE To Bravo82 >>"
+set interfaces xe-0/0/3 vlan-tagging
+set interfaces xe-0/0/3 mtu 9100
+set interfaces xe-0/0/3 encapsulation flexible-ethernet-services
+set interfaces xe-0/0/3 unit 40 description "<< Link between Bravo81 and Bravo82 >>"
+set interfaces xe-0/0/3 unit 40 bandwidth 10g
+set interfaces xe-0/0/3 unit 40 vlan-id 40
+set interfaces xe-0/0/3 unit 40 family inet address 10.10.40.1/30
+set interfaces xe-0/0/3 unit 40 family inet6 rpf-check mode loose
+set interfaces xe-0/0/3 unit 40 family mpls maximum-labels 5
+set interfaces ae0 description "<< 2x10GE to foxtrot83 ae4 >>"
+set interfaces ae0 flexible-vlan-tagging
+set interfaces ae0 mtu 9100
+set interfaces ae0 encapsulation flexible-ethernet-services
+set interfaces ae0 aggregated-ether-options load-balance adaptive tolerance 10
+set interfaces ae0 aggregated-ether-options minimum-links 1
+set interfaces ae0 aggregated-ether-options link-speed 10g
+set interfaces ae0 aggregated-ether-options lacp active
+set interfaces ae0 unit 8 description Vega81
+set interfaces ae0 unit 8 vlan-id 8
+set interfaces ae0 unit 8 family inet address 10.11.8.237/30
+set interfaces ae0 unit 12 description "<< MGMT : vpn Management Foxtrot Access >>"
+set interfaces ae0 unit 12 vlan-id 12
+set interfaces ae0 unit 12 family inet address 10.11.4.33/28 primary
+set interfaces ae0 unit 12 family inet address 10.11.8.33/30
+set interfaces ae0 unit 12 family inet address 10.11.8.129/26
+set interfaces ae0 unit 200 description "<< Equinix node NOC >>"
+set interfaces ae0 unit 200 vlan-id 200
+set interfaces ae0 unit 200 family inet address 10.11.8.253/30
+set interfaces ae0 unit 401 description "<< Vlan to Hosting >>"
+set interfaces ae0 unit 401 vlan-id 401
+set interfaces ae0 unit 401 family inet mtu 1500
+set interfaces ae0 unit 401 family inet address 10.0.8.105/30
+set interfaces ae0 unit 999 apply-groups-except arp-policer
+set interfaces ae0 unit 999 description "<< L2VPN Bravo81-Bravo8 for L3 Mirroring >>"
+set interfaces ae0 unit 999 encapsulation vlan-ccc
+set interfaces ae0 unit 999 vlan-id 999
+set interfaces ae0 unit 999 family ccc
+set interfaces ae0 unit 1081 description "<< BGP to Foxtrot83, Foxtrot82, Foxtrot84 >>"
+set interfaces ae0 unit 1081 vlan-id 1081
+set interfaces ae0 unit 1081 family inet address 10.0.81.1/29
+set interfaces lo0 unit 0 description "<< Management interface for GRT >>"
+set interfaces lo0 unit 0 family inet filter input self-protect
+set interfaces lo0 unit 0 family inet address 185.129.101.3/32 primary
+set interfaces lo0 unit 0 family inet6 filter input self-protect_v6
+set interfaces lo0 unit 0 family inet6 address 2a0a:4180::41/128
+set interfaces lo0 unit 1 family inet filter input self-protect
+set interfaces lo0 unit 1 family inet address 10.0.8.7/32
+set interfaces lo0 unit 11 description "<< MGMT Lo vrf Management >>"
+set interfaces lo0 unit 11 family inet address 10.11.41.1/32
+set forwarding-options port-mirroring input rate 1
+set forwarding-options port-mirroring input run-length 1
+set forwarding-options port-mirroring family inet output interface lt-0/0/0.0 next-hop 10.0.81.254
+set forwarding-options load-balance indexed-load-balance
+set forwarding-options load-balance per-flow hash-seed
+set forwarding-options hash-key family inet layer-3
+set forwarding-options hash-key family inet layer-4
+set forwarding-options hash-key family mpls label-1
+set forwarding-options hash-key family mpls label-2
+set forwarding-options hash-key family mpls label-3
+set forwarding-options hash-key family mpls payload ether-pseudowire
+set forwarding-options hash-key family mpls payload ip
+set forwarding-options hash-key family multiservice source-mac
+set forwarding-options hash-key family multiservice destination-mac
+set forwarding-options hash-key family multiservice payload ip layer-3
+set forwarding-options enhanced-hash-key services-loadbalancing family inet layer-3-services source-address
+set forwarding-options enhanced-hash-key services-loadbalancing family inet layer-3-services destination-address
+set forwarding-options enhanced-hash-key family inet incoming-interface-index
+set forwarding-options enhanced-hash-key family inet no-destination-port
+set forwarding-options enhanced-hash-key family inet no-source-port
+set forwarding-options enhanced-hash-key family inet6 incoming-interface-index
+set forwarding-options enhanced-hash-key family inet6 no-destination-port
+set forwarding-options enhanced-hash-key family inet6 no-source-port
+set forwarding-options enhanced-hash-key family mpls incoming-interface-index
+set forwarding-options enhanced-hash-key family multiservice incoming-interface-index
+deactivate forwarding-options enhanced-hash-key
+set forwarding-options rpf-loose-mode-discard family inet
+set policy-options prefix-list NTP-local apply-path "system ntp source-address <*>"
+set policy-options prefix-list NTP apply-path "system ntp server <*.*>"
+set policy-options prefix-list DNS apply-path "system name-server <*.*>"
+set policy-options prefix-list BGP apply-path "protocols bgp group <*> neighbor <*.*>"
+set policy-options prefix-list links_net 10.0.9.192/30
+set policy-options prefix-list links_net 10.0.15.48/30
+set policy-options prefix-list links_net 10.0.91.8/30
+set policy-options prefix-list links_net 10.0.91.100/30
+set policy-options prefix-list links_net 10.0.120.100/30
+set policy-options prefix-list links_net 10.0.120.104/30
+set policy-options prefix-list links_net 10.0.140.0/30
+set policy-options prefix-list links_net 10.0.140.4/30
+set policy-options prefix-list links_net 10.10.40.0/30
+set policy-options prefix-list links_net 10.10.40.24/30
+set policy-options prefix-list links_net 10.10.69.16/30
+set policy-options prefix-list links_net 10.10.84.0/30
+set policy-options prefix-list links_net 10.10.89.8/30
+set policy-options prefix-list loopbacks_net 185.129.101.0/32
+set policy-options prefix-list loopbacks_net 185.129.101.1/32
+set policy-options prefix-list loopbacks_net 185.129.101.2/32
+set policy-options prefix-list loopbacks_net 185.129.101.3/32
+set policy-options prefix-list loopbacks_net 185.129.101.4/32
+set policy-options prefix-list loopbacks_net 185.129.101.5/32
+set policy-options prefix-list loopbacks_net 185.129.101.10/32
+set policy-options prefix-list loopbacks_net 185.129.101.12/32
+set policy-options prefix-list loopbacks_net 185.129.101.14/32
+set policy-options prefix-list loopbacks_net 185.129.101.15/32
+set policy-options prefix-list loopbacks_net 185.129.101.100/32
+set policy-options prefix-list loopbacks_net 185.129.101.101/32
+set policy-options prefix-list RSVP_LSP_DST apply-path "protocols mpls label-switched-path <*> to <*>"
+set policy-options prefix-list L2Circuit apply-path "protocols l2circuit neighbor <*>"
+set policy-options prefix-list BGP_GRT_Neighbours apply-path "protocols bgp group <*> neighbor <*>"
+set policy-options prefix-list BGP_VPN_Neighbours apply-path "routing-instances <*> protocols bgp group <*> neighbor <*>"
+set policy-options prefix-list LINK_Local_v6 apply-path "interfaces <*> unit <*> family inet6 address <*>"
+set policy-options prefix-list our-routes 93.171.200.0/24
+set policy-options prefix-list our-routes 185.129.100.0/22
+set policy-options prefix-list our-routes 185.129.100.0/24
+set policy-options prefix-list our-routes 185.129.101.0/24
+set policy-options prefix-list our-routes 185.129.102.0/24
+set policy-options prefix-list our-routes 185.129.103.0/24
+set policy-options prefix-list our-routes 186.2.160.0/20
+set policy-options prefix-list our-routes 186.2.160.0/24
+set policy-options prefix-list our-routes 186.2.161.0/24
+set policy-options prefix-list our-routes 186.2.162.0/24
+set policy-options prefix-list our-routes 186.2.163.0/24
+set policy-options prefix-list our-routes 186.2.164.0/24
+set policy-options prefix-list our-routes 186.2.165.0/24
+set policy-options prefix-list our-routes 186.2.166.0/24
+set policy-options prefix-list our-routes 186.2.167.0/24
+set policy-options prefix-list our-routes 186.2.168.0/24
+set policy-options prefix-list our-routes 186.2.169.0/24
+set policy-options prefix-list our-routes 186.2.170.0/24
+set policy-options prefix-list our-routes 186.2.171.0/24
+set policy-options prefix-list our-routes 186.2.172.0/24
+set policy-options prefix-list our-routes 186.2.173.0/24
+set policy-options prefix-list our-routes 186.2.174.0/24
+set policy-options prefix-list our-routes 186.2.175.0/24
+set policy-options prefix-list our-routes 190.115.16.0/20
+set policy-options prefix-list our-routes 190.115.16.0/24
+set policy-options prefix-list our-routes 190.115.17.0/24
+set policy-options prefix-list our-routes 190.115.18.0/24
+set policy-options prefix-list our-routes 190.115.19.0/24
+set policy-options prefix-list our-routes 190.115.20.0/24
+set policy-options prefix-list our-routes 190.115.21.0/24
+set policy-options prefix-list our-routes 190.115.22.0/24
+set policy-options prefix-list our-routes 190.115.23.0/24
+set policy-options prefix-list our-routes 190.115.24.0/24
+set policy-options prefix-list our-routes 190.115.25.0/24
+set policy-options prefix-list our-routes 190.115.26.0/24
+set policy-options prefix-list our-routes 190.115.27.0/24
+set policy-options prefix-list our-routes 190.115.28.0/24
+set policy-options prefix-list our-routes 190.115.29.0/24
+set policy-options prefix-list our-routes 190.115.30.0/24
+set policy-options prefix-list our-routes 190.115.31.0/24
+deactivate policy-options prefix-list our-routes 190.115.31.0/24
+set policy-options prefix-list BGP-inet.0 apply-path "protocols bgp group <*> neighbor <*>"
+set policy-options prefix-list BGP-routing-instances apply-path "routing-instances <*> protocols bgp group <*> neighbor <*>"
+set policy-options prefix-list SNMP_server apply-path "snmp community <*> clients <*>"
+set policy-options prefix-list CUSTOMER:AS398088 203.28.246.0/24
+set policy-options policy-statement CUSTOMER:AS398088 term blackhole-routes-accept from community blackhole_ripe
+set policy-options policy-statement CUSTOMER:AS398088 term blackhole-routes-accept from prefix-list-filter CUSTOMER:AS398088 orlonger
+set policy-options policy-statement CUSTOMER:AS398088 term blackhole-routes-accept then community add no-export
+set policy-options policy-statement CUSTOMER:AS398088 term blackhole-routes-accept then next-hop discard
+set policy-options policy-statement CUSTOMER:AS398088 term blackhole-routes-accept then accept
+set policy-options policy-statement CUSTOMER:AS398088 term valid-routes-accept from prefix-list-filter CUSTOMER:AS398088 orlonger
+set policy-options policy-statement CUSTOMER:AS398088 term valid-routes-accept then next policy
+set policy-options policy-statement CUSTOMER:AS398088 then reject
+set policy-options policy-statement Hosting-In term 1 from route-filter 186.2.161.0/24 upto /32
+set policy-options policy-statement Hosting-In term 1 from route-filter 190.115.16.0/24 upto /32
+set policy-options policy-statement Hosting-In term 1 then metric 0
+set policy-options policy-statement Hosting-In term 1 then accept
+set policy-options policy-statement Hosting-In term 2 then reject
+set policy-options policy-statement Next-Hop-Self term do-not-change from protocol bgp
+set policy-options policy-statement Next-Hop-Self term do-not-change from route-type internal
+set policy-options policy-statement Next-Hop-Self term do-not-change then next policy
+set policy-options policy-statement Next-Hop-Self then next-hop self
+set policy-options policy-statement Next-Hop-Self_v2 term do-not-change from protocol bgp
+set policy-options policy-statement Next-Hop-Self_v2 term do-not-change from route-type internal
+set policy-options policy-statement Next-Hop-Self_v2 term do-not-change then next policy
+set policy-options policy-statement Next-Hop-Self_v2 then next-hop self
+set policy-options policy-statement Vega-loopbacks term vega81 from protocol bgp
+set policy-options policy-statement Vega-loopbacks term vega81 from route-filter 10.11.8.241/32 exact
+set policy-options policy-statement Vega-loopbacks term vega81 then accept
+set policy-options policy-statement Vega-loopbacks then reject
+set policy-options policy-statement connected-to-bgp term connected from protocol direct
+set policy-options policy-statement connected-to-bgp term connected then local-preference 999
+set policy-options policy-statement connected-to-bgp term connected then origin igp
+set policy-options policy-statement connected-to-bgp term connected then community add type_Connected
+set policy-options policy-statement connected-to-bgp term connected then accept
+set policy-options policy-statement default term default_accept from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement default term default_accept then accept
+set policy-options policy-statement default term other_reject then reject
+set policy-options policy-statement default-proxy term default_route from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement default-proxy term default_route then accept
+set policy-options policy-statement default-proxy term reject_other then reject
+set policy-options policy-statement iBGP_export_GRT term reject-vpn-routes from protocol bgp
+set policy-options policy-statement iBGP_export_GRT term reject-vpn-routes from community vpn-routes
+set policy-options policy-statement iBGP_export_GRT term reject-vpn-routes then reject
+set policy-options policy-statement iBGP_export_GRT term reject_unprotected_clinets from protocol bgp
+set policy-options policy-statement iBGP_export_GRT term reject_unprotected_clinets from community Client-Unprotected-mark
+set policy-options policy-statement iBGP_export_GRT term reject_unprotected_clinets then reject
+set policy-options policy-statement iBGP_export_GRT term full-from-uplink from protocol bgp
+set policy-options policy-statement iBGP_export_GRT term full-from-uplink from community upstreams
+set policy-options policy-statement iBGP_export_GRT term full-from-uplink from community peers
+set policy-options policy-statement iBGP_export_GRT term full-from-uplink from route-type external
+set policy-options policy-statement iBGP_export_GRT term full-from-uplink then reject
+set policy-options policy-statement iBGP_export_GRT term any-bgp from protocol bgp
+set policy-options policy-statement iBGP_export_GRT term any-bgp then accept
+set policy-options policy-statement iBGP_export_GRT term any then reject
+set policy-options policy-statement iBGP_import_GRT term reject-vpn-routes from protocol bgp
+set policy-options policy-statement iBGP_import_GRT term reject-vpn-routes from community vpn-routes
+set policy-options policy-statement iBGP_import_GRT term reject-vpn-routes then reject
+set policy-options policy-statement iBGP_import_GRT term unprotected_clinets from protocol bgp
+set policy-options policy-statement iBGP_import_GRT term unprotected_clinets from community Client-Unprotected-mark
+set policy-options policy-statement iBGP_import_GRT term unprotected_clinets then reject
+set policy-options policy-statement iBGP_import_GRT term full-from-uplink from protocol bgp
+set policy-options policy-statement iBGP_import_GRT term full-from-uplink from community peers
+set policy-options policy-statement iBGP_import_GRT term full-from-uplink from community upstreams
+set policy-options policy-statement iBGP_import_GRT term full-from-uplink then reject
+set policy-options policy-statement iBGP_import_GRT term black-hole from protocol bgp
+set policy-options policy-statement iBGP_import_GRT term black-hole from community blackhole_ripe
+set policy-options policy-statement iBGP_import_GRT term black-hole then next-hop discard
+set policy-options policy-statement iBGP_import_GRT term black-hole then accept
+set policy-options policy-statement iBGP_import_GRT term any-bgp from protocol bgp
+set policy-options policy-statement iBGP_import_GRT term any-bgp then accept
+set policy-options policy-statement iBGP_import_GRT term any then reject
+set policy-options policy-statement lo0_to_Management term 1 from route-filter 185.129.101.3/32 exact
+set policy-options policy-statement lo0_to_Management term 1 then accept
+set policy-options policy-statement lo0_to_Management term 2 then reject
+set policy-options policy-statement loadbalance then load-balance per-packet
+set policy-options policy-statement lsp-cos-selection then cos-next-hop-map lsp-cos-map
+set policy-options policy-statement net_10/8 term 1 from route-filter 10.0.0.0/8 exact
+set policy-options policy-statement net_10/8 term 1 then metric 5
+set policy-options policy-statement net_10/8 term 1 then next-hop self
+set policy-options policy-statement net_10/8 term 1 then accept
+set policy-options policy-statement net_10/8 term 2 then reject
+set policy-options policy-statement reject-all then reject
+set policy-options policy-statement reject_Ext_ospf term 0 from route-filter 10.0.0.0/8 exact
+set policy-options policy-statement reject_Ext_ospf term 0 then accept
+set policy-options policy-statement reject_Ext_ospf term 1 from protocol ospf
+set policy-options policy-statement reject_Ext_ospf term 1 from external
+set policy-options policy-statement reject_Ext_ospf term 1 then reject
+set policy-options policy-statement reject_Ext_ospf term 2 then accept
+set policy-options policy-statement static-and-connected-to-bgp term connected from protocol direct
+set policy-options policy-statement static-and-connected-to-bgp term connected then tag 999
+set policy-options policy-statement static-and-connected-to-bgp term connected then local-preference 999
+set policy-options policy-statement static-and-connected-to-bgp term connected then origin igp
+set policy-options policy-statement static-and-connected-to-bgp term connected then community add type_Connected
+set policy-options policy-statement static-and-connected-to-bgp term connected then accept
+set policy-options policy-statement static-and-connected-to-bgp term static from protocol static
+set policy-options policy-statement static-and-connected-to-bgp term static from tag 999
+set policy-options policy-statement static-and-connected-to-bgp term static then local-preference 999
+set policy-options policy-statement static-and-connected-to-bgp term static then origin igp
+set policy-options policy-statement static-and-connected-to-bgp term static then community add type_Connected
+set policy-options policy-statement static-and-connected-to-bgp term static then accept
+set policy-options community Client-Unprotected-mark members 57724:10001
+set policy-options community blackhole_ripe members 57724:666
+set policy-options community no-export members no-export
+set policy-options community peers members "^57724:2....$"
+set policy-options community type_Connected members 65000:4
+set policy-options community upstreams members "^57724:3....$"
+set policy-options community vpn-routes members 57724:22
+set class-of-service classifiers exp mpls-in forwarding-class best-effort loss-priority high code-points 001
+set class-of-service classifiers exp mpls-in forwarding-class best-effort loss-priority low code-points 000
+set class-of-service classifiers exp mpls-in forwarding-class expedited-forwarding loss-priority high code-points 011
+set class-of-service classifiers exp mpls-in forwarding-class expedited-forwarding loss-priority low code-points 010
+set class-of-service classifiers exp mpls-in forwarding-class assured-forwarding loss-priority high code-points 101
+set class-of-service classifiers exp mpls-in forwarding-class assured-forwarding loss-priority low code-points 100
+set class-of-service classifiers exp mpls-in forwarding-class network-control loss-priority high code-points 111
+set class-of-service classifiers exp mpls-in forwarding-class network-control loss-priority low code-points 110
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class best-effort loss-priority high code-points 001
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class best-effort loss-priority low code-points 000
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class expedited-forwarding loss-priority high code-points 011
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class expedited-forwarding loss-priority low code-points 010
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class assured-forwarding loss-priority high code-points 101
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class assured-forwarding loss-priority low code-points 100
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class network-control loss-priority high code-points 111
+set class-of-service classifiers ieee-802.1 802.1p-in forwarding-class network-control loss-priority low code-points 110
+set class-of-service host-outbound-traffic forwarding-class network-control
+set class-of-service drop-profiles plp_80 fill-level 80 drop-probability 100
+set class-of-service forwarding-classes class best-effort queue-num 0
+set class-of-service forwarding-classes class expedited-forwarding queue-num 1
+set class-of-service forwarding-classes class assured-forwarding queue-num 2
+set class-of-service forwarding-classes class network-control queue-num 3
+set class-of-service forwarding-classes class network-control priority high
+set class-of-service interfaces gr-*/*/* unit * forwarding-class assured-forwarding
+set class-of-service interfaces ip-*/*/* unit * forwarding-class assured-forwarding
+set class-of-service interfaces xe-*/*/* scheduler-map PRIORITY
+set class-of-service interfaces xe-0/0/0 scheduler-map PRIORITY
+set class-of-service interfaces xe-0/0/0 unit 928 classifiers exp mpls-in
+set class-of-service interfaces xe-0/0/0 unit 928 rewrite-rules exp default
+set class-of-service interfaces xe-0/0/3 scheduler-map PRIORITY
+set class-of-service interfaces xe-0/0/3 unit 40 classifiers exp mpls-in
+set class-of-service interfaces xe-0/0/3 unit 40 rewrite-rules exp default
+set class-of-service interfaces ae0 scheduler-map PRIORITY
+set class-of-service interfaces ae0 unit * forwarding-class assured-forwarding
+set class-of-service interfaces ae0 unit * rewrite-rules ieee-802.1 802.1p-out
+set class-of-service routing-instances all classifiers exp mpls-in
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class best-effort loss-priority high code-point 001
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class best-effort loss-priority low code-point 000
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class expedited-forwarding loss-priority high code-point 011
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class expedited-forwarding loss-priority low code-point 010
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class assured-forwarding loss-priority high code-point 101
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class assured-forwarding loss-priority low code-point 100
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class network-control loss-priority high code-point 111
+set class-of-service rewrite-rules ieee-802.1 802.1p-out forwarding-class network-control loss-priority low code-point 110
+set class-of-service scheduler-maps PRIORITY forwarding-class best-effort scheduler BE
+set class-of-service scheduler-maps PRIORITY forwarding-class expedited-forwarding scheduler EF
+set class-of-service scheduler-maps PRIORITY forwarding-class assured-forwarding scheduler AF
+set class-of-service scheduler-maps PRIORITY forwarding-class network-control scheduler NC
+set class-of-service scheduler-maps NORMAL forwarding-class best-effort scheduler BE_normal
+set class-of-service scheduler-maps NORMAL forwarding-class expedited-forwarding scheduler EF_normal
+set class-of-service scheduler-maps NORMAL forwarding-class assured-forwarding scheduler AF_normal
+set class-of-service scheduler-maps NORMAL forwarding-class network-control scheduler NC_normal
+set class-of-service schedulers NC transmit-rate percent 5
+set class-of-service schedulers NC buffer-size percent 5
+set class-of-service schedulers NC priority strict-high
+set class-of-service schedulers NC drop-profile-map loss-priority low protocol any drop-profile plp_80
+set class-of-service schedulers AF transmit-rate percent 40
+set class-of-service schedulers AF buffer-size percent 40
+set class-of-service schedulers AF priority medium-low
+set class-of-service schedulers AF drop-profile-map loss-priority low protocol any drop-profile plp_80
+set class-of-service schedulers EF transmit-rate percent 5
+set class-of-service schedulers EF buffer-size percent 5
+set class-of-service schedulers EF priority high
+set class-of-service schedulers EF drop-profile-map loss-priority low protocol any drop-profile plp_80
+set class-of-service schedulers BE transmit-rate percent 50
+set class-of-service schedulers BE priority low
+set class-of-service schedulers BE drop-profile-map loss-priority high protocol any drop-profile plp_80
+set class-of-service schedulers NC_normal transmit-rate percent 5
+set class-of-service schedulers NC_normal buffer-size percent 5
+set class-of-service schedulers NC_normal priority strict-high
+set class-of-service schedulers NC_normal drop-profile-map loss-priority low protocol any drop-profile plp_80
+set class-of-service schedulers AF_normal transmit-rate percent 10
+set class-of-service schedulers AF_normal buffer-size percent 10
+set class-of-service schedulers AF_normal priority medium-low
+set class-of-service schedulers AF_normal drop-profile-map loss-priority low protocol any drop-profile plp_80
+set class-of-service schedulers EF_normal transmit-rate percent 5
+set class-of-service schedulers EF_normal buffer-size percent 5
+set class-of-service schedulers EF_normal priority high
+set class-of-service schedulers EF_normal drop-profile-map loss-priority low protocol any drop-profile plp_80
+set class-of-service schedulers BE_normal transmit-rate percent 80
+set class-of-service schedulers BE_normal priority low
+set class-of-service schedulers BE_normal drop-profile-map loss-priority high protocol any drop-profile plp_80
+set class-of-service forwarding-policy next-hop-map lsp-cos-map forwarding-class network-control lsp-next-hop "^PRIORITY.*"
+set class-of-service forwarding-policy next-hop-map lsp-cos-map forwarding-class expedited-forwarding lsp-next-hop "^PRIORITY.*"
+set class-of-service forwarding-policy next-hop-map lsp-cos-map forwarding-class assured-forwarding lsp-next-hop "^PRIORITY.*"
+set class-of-service forwarding-policy next-hop-map lsp-cos-map forwarding-class best-effort lsp-next-hop "^BE.*"
+set firewall family inet6 filter self-protect_v6 term BGP_setup from source-prefix-list BGP_GRT_Neighbours
+set firewall family inet6 filter self-protect_v6 term BGP_setup from source-prefix-list BGP_VPN_Neighbours
+set firewall family inet6 filter self-protect_v6 term BGP_setup from next-header tcp
+set firewall family inet6 filter self-protect_v6 term BGP_setup from port bgp
+set firewall family inet6 filter self-protect_v6 term BGP_setup from tcp-initial
+set firewall family inet6 filter self-protect_v6 term BGP_setup then policer copp-lim1m
+set firewall family inet6 filter self-protect_v6 term BGP_setup then count BGP_setup
+set firewall family inet6 filter self-protect_v6 term BGP from source-prefix-list BGP_GRT_Neighbours
+set firewall family inet6 filter self-protect_v6 term BGP from source-prefix-list BGP_VPN_Neighbours
+set firewall family inet6 filter self-protect_v6 term BGP from next-header tcp
+set firewall family inet6 filter self-protect_v6 term BGP from port bgp
+set firewall family inet6 filter self-protect_v6 term BGP from tcp-established
+set firewall family inet6 filter self-protect_v6 term BGP then policer copp-lim10m
+set firewall family inet6 filter self-protect_v6 term BGP then count BGP
+set firewall family inet6 filter self-protect_v6 term BFD_OneHop from source-prefix-list LINK_Local_v6
+set firewall family inet6 filter self-protect_v6 term BFD_OneHop from next-header udp
+set firewall family inet6 filter self-protect_v6 term BFD_OneHop from destination-port 3784-3785
+set firewall family inet6 filter self-protect_v6 term BFD_OneHop from hop-limit 255
+set firewall family inet6 filter self-protect_v6 term BFD_OneHop then policer copp-lim1m
+set firewall family inet6 filter self-protect_v6 term BFD_OneHop then count BFD_OneHop
+set firewall family inet6 filter self-protect_v6 term ubfd-v6_discard from next-header udp
+set firewall family inet6 filter self-protect_v6 term ubfd-v6_discard from destination-port 6784
+set firewall family inet6 filter self-protect_v6 term ubfd-v6_discard then count ubfd-v6_discard
+set firewall family inet6 filter self-protect_v6 term ubfd-v6_discard then discard
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from next-header icmp6
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except destination-unreachable
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except echo-reply
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except echo-request
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except packet-too-big
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except parameter-problem
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except time-exceeded
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except neighbor-advertisement
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except router-renumbering
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except neighbor-solicit
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except router-advertisement
+set firewall family inet6 filter self-protect_v6 term ICMP_Block from icmp-type-except router-solicit
+set firewall family inet6 filter self-protect_v6 term ICMP_Block then count ICMP_Block
+set firewall family inet6 filter self-protect_v6 term ICMP_Block then discard
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_LINK from source-prefix-list LINK_Local_v6
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_LINK from next-header icmp6
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_LINK from icmp-type echo-request
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_LINK then policer copp-lim10m
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_LINK then count ICMP_PING_LINK
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_OTHER from next-header icmp6
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_OTHER from icmp-type echo-request
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_OTHER then policer copp-lim10m
+set firewall family inet6 filter self-protect_v6 term ICMP_PING_OTHER then count ICMP_PING_OTHER
+set firewall family inet6 filter self-protect_v6 term ICMP_OTHER from next-header icmp6
+set firewall family inet6 filter self-protect_v6 term ICMP_OTHER then policer copp-lim1m
+set firewall family inet6 filter self-protect_v6 term ICMP_OTHER then count ICMP_OTHER
+set firewall family inet6 filter self-protect_v6 term TRACEROUTE from next-header udp
+set firewall family inet6 filter self-protect_v6 term TRACEROUTE from port 33434-33534
+set firewall family inet6 filter self-protect_v6 term TRACEROUTE from hop-limit 1
+set firewall family inet6 filter self-protect_v6 term TRACEROUTE then policer copp-lim1m
+set firewall family inet6 filter self-protect_v6 term TRACEROUTE then count TRACEROUTE
+set firewall family inet6 filter self-protect_v6 term IPv6_ND_LOCAL from next-header icmp6
+set firewall family inet6 filter self-protect_v6 term IPv6_ND_LOCAL from hop-limit 255
+set firewall family inet6 filter self-protect_v6 term IPv6_ND_LOCAL then count IPv6_ND_LOCAL
+set firewall family inet6 filter self-protect_v6 term IPv6_ND_LOCAL then accept
+set firewall family inet6 filter self-protect_v6 term DEFAULT-DISCARD then count DEFAULT-DISCARD
+set firewall family inet6 filter self-protect_v6 term DEFAULT-DISCARD then discard
+set firewall family any filter Policing_BE_LSP term 1 from forwarding-class best-effort
+set firewall family any filter Policing_BE_LSP term 1 then policer lim20m
+set firewall family any filter Policing_BE_LSP_600m term 1 from forwarding-class best-effort
+set firewall family any filter Policing_BE_LSP_600m term 1 then policer lim600m-lsp
+set firewall policer lim2m-ICMP filter-specific
+set firewall policer lim2m-ICMP if-exceeding bandwidth-limit 2m
+set firewall policer lim2m-ICMP if-exceeding burst-size-limit 6250000
+set firewall policer lim2m-ICMP then discard
+set firewall policer management if-exceeding bandwidth-limit 100k
+set firewall policer management if-exceeding burst-size-limit 20k
+set firewall policer management then discard
+set firewall policer lim1m-copp filter-specific
+set firewall policer lim1m-copp if-exceeding bandwidth-limit 1m
+set firewall policer lim1m-copp if-exceeding burst-size-limit 625k
+set firewall policer lim1m-copp then discard
+set firewall policer lim20m filter-specific
+set firewall policer lim20m if-exceeding bandwidth-limit 20m
+set firewall policer lim20m if-exceeding burst-size-limit 1m
+set firewall policer lim20m then discard
+set firewall policer copp-lim1m if-exceeding bandwidth-limit 1m
+set firewall policer copp-lim1m if-exceeding burst-size-limit 128k
+set firewall policer copp-lim1m then discard
+set firewall policer copp-lim10m if-exceeding bandwidth-limit 10m
+set firewall policer copp-lim10m if-exceeding burst-size-limit 128k
+set firewall policer copp-lim10m then discard
+set firewall policer lim600m-lsp filter-specific
+set firewall policer lim600m-lsp if-exceeding bandwidth-limit 600m
+set firewall policer lim600m-lsp if-exceeding burst-size-limit 10m
+set firewall policer lim600m-lsp then discard
+set firewall policer ARP-Policer if-exceeding bandwidth-limit 80k
+set firewall policer ARP-Policer if-exceeding burst-size-limit 1500
+set firewall policer ARP-Policer then discard
+set firewall policer lim2m filter-specific
+set firewall policer lim2m if-exceeding bandwidth-limit 2m
+set firewall policer lim2m if-exceeding burst-size-limit 6250000
+set firewall policer lim2m then discard
+set firewall filter self-protect term First_Fragment from first-fragment
+set firewall filter self-protect term First_Fragment then count First_Fragment
+set firewall filter self-protect term First_Fragment then discard
+set firewall filter self-protect term Fragment from is-fragment
+set firewall filter self-protect term Fragment then count Fragment
+set firewall filter self-protect term Fragment then discard
+set firewall filter self-protect term OSPF from protocol ospf
+set firewall filter self-protect term OSPF then count ospf
+set firewall filter self-protect term OSPF then accept
+set firewall filter self-protect term SSH-outgoing from source-address 10.0.0.0/8
+set firewall filter self-protect term SSH-outgoing from protocol tcp
+set firewall filter self-protect term SSH-outgoing from source-port ssh
+set firewall filter self-protect term SSH-outgoing then count ssh-outgoing
+set firewall filter self-protect term SSH-outgoing then accept
+set firewall filter self-protect term SSH from source-address 10.0.0.0/8
+set firewall filter self-protect term SSH from source-address 186.2.170.192/27
+set firewall filter self-protect term SSH from protocol tcp
+set firewall filter self-protect term SSH from destination-port ssh
+set firewall filter self-protect term SSH then count ssh
+set firewall filter self-protect term SSH then accept
+set firewall filter self-protect term BACKUP_SCP from source-address 10.11.2.66/32
+set firewall filter self-protect term BACKUP_SCP from protocol tcp
+set firewall filter self-protect term BACKUP_SCP from source-port ssh
+set firewall filter self-protect term BACKUP_SCP then accept
+set firewall filter self-protect term ICMP_echo-request_our_net from source-address 10.0.0.0/8
+set firewall filter self-protect term ICMP_echo-request_our_net from source-address 192.168.20.0/24
+set firewall filter self-protect term ICMP_echo-request_our_net from source-address 192.168.200.0/30
+set firewall filter self-protect term ICMP_echo-request_our_net from source-prefix-list our-routes
+set firewall filter self-protect term ICMP_echo-request_our_net from protocol icmp
+set firewall filter self-protect term ICMP_echo-request_our_net from icmp-type echo-request
+set firewall filter self-protect term ICMP_echo-request_our_net then policer lim2m-ICMP
+set firewall filter self-protect term ICMP_echo-request_our_net then accept
+set firewall filter self-protect term ICMP_echo-replay from protocol icmp
+set firewall filter self-protect term ICMP_echo-replay from icmp-type echo-reply
+set firewall filter self-protect term ICMP_echo-replay then policer lim2m-ICMP
+set firewall filter self-protect term ICMP_echo-replay then accept
+set firewall filter self-protect term SNMP from source-prefix-list SNMP_server
+set firewall filter self-protect term SNMP from protocol udp
+set firewall filter self-protect term SNMP from destination-port snmp
+set firewall filter self-protect term SNMP then count snmp
+set firewall filter self-protect term SNMP then accept
+set firewall filter self-protect term NTP-local from source-prefix-list NTP-local
+set firewall filter self-protect term NTP-local from protocol udp
+set firewall filter self-protect term NTP-local from port ntp
+set firewall filter self-protect term NTP-local then policer management
+set firewall filter self-protect term NTP-local then count ntp-local
+set firewall filter self-protect term NTP-local then accept
+set firewall filter self-protect term NTP from source-prefix-list NTP
+set firewall filter self-protect term NTP from protocol udp
+set firewall filter self-protect term NTP from source-port ntp
+set firewall filter self-protect term NTP then policer management
+set firewall filter self-protect term NTP then count ntp
+set firewall filter self-protect term NTP then accept
+set firewall filter self-protect term DNS from source-prefix-list DNS
+set firewall filter self-protect term DNS from source-port domain
+set firewall filter self-protect term DNS then policer management
+set firewall filter self-protect term DNS then count dns
+set firewall filter self-protect term DNS then accept
+set firewall filter self-protect term FTP from source-address 10.10.100.0/24
+set firewall filter self-protect term FTP from protocol tcp
+set firewall filter self-protect term FTP then accept
+deactivate firewall filter self-protect term FTP
+set firewall filter self-protect term RADIUS from source-address 10.11.255.100/32
+set firewall filter self-protect term RADIUS from source-address 10.11.2.67/32
+set firewall filter self-protect term RADIUS from source-address 10.11.4.35/32
+set firewall filter self-protect term RADIUS from source-port radius
+set firewall filter self-protect term RADIUS then count radius
+set firewall filter self-protect term RADIUS then accept
+set firewall filter self-protect term BGP from source-prefix-list BGP-inet.0
+set firewall filter self-protect term BGP from source-prefix-list BGP-routing-instances
+set firewall filter self-protect term BGP from protocol tcp
+set firewall filter self-protect term BGP from port bgp
+set firewall filter self-protect term BGP then count bgp
+set firewall filter self-protect term BGP then accept
+set firewall filter self-protect term BFD-bgp from source-prefix-list BGP
+set firewall filter self-protect term BFD-bgp from protocol udp
+set firewall filter self-protect term BFD-bgp from destination-port 3784
+set firewall filter self-protect term BFD-bgp from destination-port 4784
+set firewall filter self-protect term BFD-bgp from destination-port 3785
+set firewall filter self-protect term BFD-bgp then count bfd-bgp
+set firewall filter self-protect term BFD-bgp then accept
+set firewall filter self-protect term ubfd_discard from protocol udp
+set firewall filter self-protect term ubfd_discard from destination-port 6784
+set firewall filter self-protect term ubfd_discard then count ubfd_discard
+set firewall filter self-protect term ubfd_discard then discard
+set firewall filter self-protect term BFD from source-address 10.10.0.0/16
+set firewall filter self-protect term BFD from source-address 10.0.0.0/16
+set firewall filter self-protect term BFD from protocol udp
+set firewall filter self-protect term BFD from destination-port 3784
+set firewall filter self-protect term BFD then count bfd_link
+set firewall filter self-protect term BFD then accept
+set firewall filter self-protect term NETCONF-via-SSH from source-address 10.11.2.66/32
+set firewall filter self-protect term NETCONF-via-SSH from source-address 10.11.0.0/24
+set firewall filter self-protect term NETCONF-via-SSH from source-address 10.11.2.69/32
+set firewall filter self-protect term NETCONF-via-SSH from source-address 10.11.2.77/32
+set firewall filter self-protect term NETCONF-via-SSH from protocol tcp
+set firewall filter self-protect term NETCONF-via-SSH from destination-port 830
+set firewall filter self-protect term NETCONF-via-SSH then count netconf-via-ssh
+set firewall filter self-protect term NETCONF-via-SSH then accept
+set firewall filter self-protect term RSVP from source-prefix-list loopbacks_net
+set firewall filter self-protect term RSVP from source-prefix-list links_net
+set firewall filter self-protect term RSVP from protocol rsvp
+set firewall filter self-protect term RSVP then policer lim1m-copp
+set firewall filter self-protect term RSVP then count RSVP
+set firewall filter self-protect term LDP_over_RSVP from source-prefix-list RSVP_LSP_DST
+set firewall filter self-protect term LDP_over_RSVP from protocol udp
+set firewall filter self-protect term LDP_over_RSVP from port ldp
+set firewall filter self-protect term LDP_over_RSVP then policer lim1m-copp
+set firewall filter self-protect term LDP_over_RSVP then count LDP_over_RSVP
+set firewall filter self-protect term LDP_UDP_LINK from destination-address 224.0.0.2/32
+set firewall filter self-protect term LDP_UDP_LINK from source-prefix-list links_net
+set firewall filter self-protect term LDP_UDP_LINK from protocol udp
+set firewall filter self-protect term LDP_UDP_LINK from ttl 1
+set firewall filter self-protect term LDP_UDP_LINK from ttl 255
+deactivate firewall filter self-protect term LDP_UDP_LINK from ttl
+set firewall filter self-protect term LDP_UDP_LINK from port ldp
+set firewall filter self-protect term LDP_UDP_LINK then policer lim1m-copp
+set firewall filter self-protect term LDP_UDP_LINK then count LDP_UDP_LINK
+set firewall filter self-protect term LDP_UDP_L2C from source-prefix-list L2Circuit
+set firewall filter self-protect term LDP_UDP_L2C from protocol udp
+set firewall filter self-protect term LDP_UDP_L2C from port ldp
+set firewall filter self-protect term LDP_UDP_L2C then policer lim1m-copp
+set firewall filter self-protect term LDP_UDP_L2C then count LDP_UDP_L2C
+set firewall filter self-protect term LDP_UDP_Loopbacks from source-prefix-list loopbacks_net
+set firewall filter self-protect term LDP_UDP_Loopbacks from protocol udp
+set firewall filter self-protect term LDP_UDP_Loopbacks from port ldp
+set firewall filter self-protect term LDP_UDP_Loopbacks then policer lim1m-copp
+set firewall filter self-protect term LDP_UDP_Loopbacks then count LDP_UDP_Loopbacks
+set firewall filter self-protect term LDP_TCP_setup from source-prefix-list L2Circuit
+set firewall filter self-protect term LDP_TCP_setup from source-prefix-list RSVP_LSP_DST
+set firewall filter self-protect term LDP_TCP_setup from source-prefix-list loopbacks_net
+set firewall filter self-protect term LDP_TCP_setup from protocol tcp
+set firewall filter self-protect term LDP_TCP_setup from port ldp
+set firewall filter self-protect term LDP_TCP_setup from tcp-initial
+set firewall filter self-protect term LDP_TCP_setup then policer lim1m-copp
+set firewall filter self-protect term LDP_TCP_setup then count LDP_TCP_setup
+set firewall filter self-protect term LDP_TCP from source-prefix-list L2Circuit
+set firewall filter self-protect term LDP_TCP from source-prefix-list RSVP_LSP_DST
+set firewall filter self-protect term LDP_TCP from source-prefix-list loopbacks_net
+set firewall filter self-protect term LDP_TCP from protocol tcp
+set firewall filter self-protect term LDP_TCP from port ldp
+set firewall filter self-protect term LDP_TCP from tcp-established
+set firewall filter self-protect term LDP_TCP then policer lim1m-copp
+set firewall filter self-protect term LDP_TCP then count LDP_TCP
+set firewall filter self-protect term LDP_Block from protocol tcp
+set firewall filter self-protect term LDP_Block from protocol udp
+set firewall filter self-protect term LDP_Block from port ldp
+set firewall filter self-protect term LDP_Block then count LDP_Block
+set firewall filter self-protect term LDP_Block then syslog
+set firewall filter self-protect term LDP_Block then discard
+set firewall filter self-protect term MPLS_PING_TRACE from destination-address 127.0.0.0/8
+set firewall filter self-protect term MPLS_PING_TRACE from source-prefix-list loopbacks_net
+set firewall filter self-protect term MPLS_PING_TRACE from source-prefix-list links_net
+set firewall filter self-protect term MPLS_PING_TRACE from protocol udp
+set firewall filter self-protect term MPLS_PING_TRACE from ttl 1
+set firewall filter self-protect term MPLS_PING_TRACE from destination-port 3503
+set firewall filter self-protect term MPLS_PING_TRACE then policer lim1m-copp
+set firewall filter self-protect term MPLS_PING_TRACE then count mpls_ping
+set firewall filter self-protect term MPLS_PING_TRACE_Reply from source-prefix-list loopbacks_net
+set firewall filter self-protect term MPLS_PING_TRACE_Reply from source-prefix-list links_net
+set firewall filter self-protect term MPLS_PING_TRACE_Reply from protocol udp
+set firewall filter self-protect term MPLS_PING_TRACE_Reply from port 3503
+set firewall filter self-protect term MPLS_PING_TRACE_Reply then policer lim1m-copp
+set firewall filter self-protect term MPLS_PING_TRACE_Reply then count mpls_ping_reply
+set firewall filter self-protect term VRRP from source-address 192.168.20.0/24
+set firewall filter self-protect term VRRP from destination-address 224.0.0.18/32
+set firewall filter self-protect term VRRP from protocol vrrp
+set firewall filter self-protect term VRRP then accept
+set firewall filter self-protect term SELF-PING-KB32883 from prefix-list loopbacks_net
+set firewall filter self-protect term SELF-PING-KB32883 from protocol udp
+set firewall filter self-protect term SELF-PING-KB32883 from port 8503
+set firewall filter self-protect term SELF-PING-KB32883 then accept
+set firewall filter self-protect term deny-all then count discard
+set firewall filter self-protect term deny-all then discard
+set routing-instances ASYM instance-type vrf
+set routing-instances ASYM route-distinguisher 57724:99
+set routing-instances ASYM vrf-target import target:57724:99
+set routing-instances ASYM vrf-target export target:57724:99
+set routing-instances ASYM vrf-table-label
+set routing-instances DMA-PROTECTED description "## DMA-C PROTECTED ##"
+set routing-instances DMA-PROTECTED instance-type vrf
+set routing-instances DMA-PROTECTED interface lt-0/0/0.1402
+set routing-instances DMA-PROTECTED interface ae0.401
+set routing-instances DMA-PROTECTED interface ae0.1081
+set routing-instances DMA-PROTECTED interface lo0.1
+set routing-instances DMA-PROTECTED route-distinguisher 57724:400
+set routing-instances DMA-PROTECTED vrf-target import target:57724:400
+set routing-instances DMA-PROTECTED vrf-target export target:57724:400
+set routing-instances DMA-PROTECTED vrf-table-label
+set routing-instances DMA-PROTECTED protocols bgp group Servers type external
+set routing-instances DMA-PROTECTED protocols bgp group Servers neighbor 10.0.8.106 description "<< Hosting >>"
+set routing-instances DMA-PROTECTED protocols bgp group Servers neighbor 10.0.8.106 local-address 10.0.8.105
+set routing-instances DMA-PROTECTED protocols bgp group Servers neighbor 10.0.8.106 hold-time 21
+set routing-instances DMA-PROTECTED protocols bgp group Servers neighbor 10.0.8.106 import Hosting-In
+set routing-instances DMA-PROTECTED protocols bgp group Servers neighbor 10.0.8.106 export default
+set routing-instances DMA-PROTECTED protocols bgp group Servers neighbor 10.0.8.106 peer-as 262254
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot type external
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot local-address 10.0.81.1
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot export default
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot peer-as 262254
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot bfd-liveness-detection minimum-interval 500
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot bfd-liveness-detection multiplier 10
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot neighbor 10.0.81.3 description "<< Foxtrot82 >>"
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot neighbor 10.0.81.4 description "<< Foxtrot84 >>"
+set routing-instances DMA-PROTECTED protocols bgp group eBGP-Foxtrot neighbor 10.0.81.2 description "<< Foxtrot83 >>"
+set routing-instances DMA-PROTECTED protocols bgp group Clients type external
+set routing-instances DMA-PROTECTED protocols bgp group Clients import reject-all
+set routing-instances DMA-PROTECTED protocols bgp group Clients family inet unicast prefix-limit maximum 1000
+set routing-instances DMA-PROTECTED protocols bgp group Clients family inet unicast prefix-limit teardown
+set routing-instances DMA-PROTECTED protocols bgp group Clients export default
+set routing-instances Management instance-type vrf
+set routing-instances Management interface lt-0/0/0.1442
+set routing-instances Management interface ae0.8
+set routing-instances Management interface ae0.12
+set routing-instances Management interface ae0.200
+set routing-instances Management interface lo0.11
+set routing-instances Management route-distinguisher 57724:11
+set routing-instances Management vrf-target import target:57724:11
+set routing-instances Management vrf-target export target:57724:11
+set routing-instances Management vrf-table-label
+set routing-instances Management protocols bgp group Vega type external
+set routing-instances Management protocols bgp group Vega description "Vega81 console accsess server"
+set routing-instances Management protocols bgp group Vega passive
+set routing-instances Management protocols bgp group Vega import Vega-loopbacks
+set routing-instances Management protocols bgp group Vega export net_10/8
+set routing-instances Management protocols bgp group Vega peer-as 65005
+set routing-instances Management protocols bgp group Vega bfd-liveness-detection minimum-interval 800
+set routing-instances Management protocols bgp group Vega bfd-liveness-detection multiplier 5
+set routing-instances Management protocols bgp group Vega neighbor 10.11.8.238 description "vega81 C2901"
+set routing-instances Management protocols bgp group Vega neighbor 10.11.8.238 local-preference 1300
+set routing-instances Management protocols bgp group Vega neighbor 10.11.8.238 local-address 10.11.8.237
+set routing-instances proxy instance-type vrf
+set routing-instances proxy route-distinguisher 57724:200
+set routing-instances proxy vrf-target import target:57724:200
+set routing-instances proxy vrf-target export target:57724:200
+set routing-instances proxy vrf-table-label
+set routing-instances proxy protocols bgp import default-proxy
+set routing-instances proxy protocols bgp export reject-all
+set routing-options interface-routes rib-group inet lo0_to_Management
+set routing-options static route 10.22.2.200/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.2.32/27 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.4.35/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.2.2/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.4.52/30 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.2.228/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.4.22/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.0.2.226/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.11.255.100/32 next-table Management.inet.0
+set routing-options static route 10.11.4.35/32 next-table Management.inet.0
+set routing-options static route 10.11.2.64/28 next-table Management.inet.0
+set routing-options static route 10.22.2.168/32 next-table DMA-PROTECTED.inet.0
+set routing-options static route 10.11.2.30/32 next-table Management.inet.0
+set routing-options static route 10.11.4.46/32 next-table Management.inet.0
+set routing-options static route 10.11.2.76/32 next-table Management.inet.0
+set routing-options static route 10.11.4.36/32 next-table Management.inet.0
+set routing-options static route 10.11.2.78/32 next-table Management.inet.0
+set routing-options rib-groups lo0_to_Management import-rib inet.0
+set routing-options rib-groups lo0_to_Management import-rib Management.inet.0
+set routing-options rib-groups lo0_to_Management import-policy lo0_to_Management
+set routing-options router-id 185.129.101.3
+set routing-options autonomous-system 57724
+set routing-options forwarding-table export loadbalance
+set routing-options forwarding-table export lsp-cos-selection
+set protocols ldp track-igp-metric
+set protocols ldp interface xe-0/0/0.928
+set protocols ldp interface xe-0/0/3.40
+set protocols ldp interface lo0.0
+set protocols bgp path-selection always-compare-med
+set protocols bgp path-selection med-plus-igp
+set protocols bgp group RR type internal
+set protocols bgp group RR local-address 185.129.101.3
+set protocols bgp group RR import iBGP_import_GRT
+set protocols bgp group RR family inet unicast
+set protocols bgp group RR family inet-vpn unicast
+set protocols bgp group RR family inet-vpn flow
+set protocols bgp group RR family inet6 labeled-unicast explicit-null
+set protocols bgp group RR family inet6-vpn unicast
+set protocols bgp group RR family l2vpn signaling
+set protocols bgp group RR family evpn signaling
+set protocols bgp group RR family inet-mvpn signaling
+set protocols bgp group RR export Next-Hop-Self_v2
+set protocols bgp group RR export static-and-connected-to-bgp
+set protocols bgp group RR export iBGP_export_GRT
+set protocols bgp group RR vpn-apply-export
+set protocols bgp group RR neighbor 185.129.101.100
+set protocols bgp group RR neighbor 185.129.101.101
+set protocols ospf traffic-engineering
+set protocols ospf import reject_Ext_ospf
+set protocols ospf no-rfc-1583
+set protocols ospf area 0.0.0.0 interface lo0.0
+set protocols ospf area 0.0.0.0 interface xe-0/0/3.40 interface-type p2p
+set protocols ospf area 0.0.0.0 interface xe-0/0/3.40 metric 5
+set protocols ospf area 0.0.0.0 interface xe-0/0/3.40 ldp-synchronization
+set protocols ospf area 0.0.0.0 interface xe-0/0/0.928 interface-type p2p
+set protocols ospf area 0.0.0.0 interface xe-0/0/0.928 metric 200
+set protocols ospf area 0.0.0.0 interface xe-0/0/0.928 ldp-synchronization
+set protocols ospf area 0.0.0.0 interface xe-0/0/0.928 bfd-liveness-detection minimum-interval 400
+set protocols ospf area 0.0.0.0 interface xe-0/0/0.928 bfd-liveness-detection multiplier 4
+set protocols ospf area 0.0.0.0 interface xe-0/0/0.928 bfd-liveness-detection full-neighbors-only
+set protocols rsvp interface xe-0/0/3.40 aggregate
+set protocols rsvp interface xe-0/0/3.40 reliable
+set protocols rsvp interface xe-0/0/3.40 subscription 95
+set protocols rsvp interface xe-0/0/3.40 link-protection
+set protocols rsvp interface xe-0/0/0.928 aggregate
+set protocols rsvp interface xe-0/0/0.928 reliable
+set protocols rsvp interface xe-0/0/0.928 subscription 95
+set protocols rsvp interface xe-0/0/0.928 link-protection
+set protocols mpls statistics file mpls_auto-statistics
+set protocols mpls statistics file size 5m
+set protocols mpls statistics file files 3
+set protocols mpls statistics interval 300
+set protocols mpls statistics auto-bandwidth
+set protocols mpls traffic-engineering mpls-forwarding
+set protocols mpls ipv6-tunneling
+set protocols mpls icmp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 to 185.129.101.2
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 auto-bandwidth maximum-bandwidth 10g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO8 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 to 185.129.101.2
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 auto-bandwidth maximum-bandwidth 10g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 to 185.129.101.4
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 auto-bandwidth maximum-bandwidth 10g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO82 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 to 185.129.101.4
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 auto-bandwidth maximum-bandwidth 10g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO82 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 to 185.129.101.2
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 auto-bandwidth maximum-bandwidth 10g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO8-1 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 to 185.129.101.10
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO92 policing filter Policing_BE_LSP_600m
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 to 185.129.101.10
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO92 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 to 185.129.101.5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO11 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 to 185.129.101.5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO11 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 to 185.129.101.12
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO12 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 to 185.129.101.12
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO12 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 to 185.129.101.14
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 install 185.129.101.18/32 active
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 install 185.129.101.19/32 active
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO14 policing filter Policing_BE_LSP_600m
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 to 185.129.101.14
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 to 185.129.101.14
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO14-1 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 to 185.129.101.15
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO15 policing filter Policing_BE_LSP_600m
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 to 185.129.101.15
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO15 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 to 185.129.101.0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO91 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 to 185.129.101.0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 to 185.129.101.0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO91-1 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 to 10.255.0.16
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 to 10.255.0.16
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 ldp-tunneling
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 optimize-timer 3600
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 priority 3 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 adaptive
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 fast-reroute
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path PRIORITY-BRAVO81-BRAVO16-1 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 to 10.255.0.16
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 ldp-tunneling
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 install 190.115.23.1/32 active
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 install 190.115.23.2/32 active
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 optimize-timer 3600
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 priority 7 7
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 adaptive
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 auto-bandwidth adjust-interval 900
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 auto-bandwidth adjust-threshold 5
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 auto-bandwidth minimum-bandwidth 0
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 auto-bandwidth maximum-bandwidth 1g
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 auto-bandwidth adjust-threshold-overflow-limit 3
+set protocols mpls label-switched-path BE-BRAVO81-BRAVO16 auto-bandwidth resignal-minimum-bandwidth
+set protocols mpls path Bravo92 185.129.101.10 loose
+set protocols mpls path Bravo9 185.129.101.1 loose
+set protocols mpls interface xe-0/0/3.40
+set protocols mpls interface xe-0/0/0.928
+set protocols l2circuit neighbor 185.129.101.2 interface ae0.999 virtual-circuit-id 999
+set protocols l2circuit neighbor 185.129.101.2 interface ae0.999 no-control-word
+set protocols l2circuit neighbor 185.129.101.2 interface ae0.999 ignore-encapsulation-mismatch
+set protocols l2circuit neighbor 185.129.101.2 interface ae0.999 ignore-mtu-mismatch
+set protocols l2circuit neighbor 185.129.101.10 interface lt-0/0/0.1 virtual-circuit-id 1481
+set protocols l2circuit neighbor 185.129.101.10 interface lt-0/0/0.1 no-control-word
+set protocols l2circuit neighbor 185.129.101.10 interface lt-0/0/0.1 ignore-encapsulation-mismatch
+set protocols l2circuit neighbor 185.129.101.10 interface lt-0/0/0.1 ignore-mtu-mismatch
+

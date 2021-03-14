@@ -1,0 +1,2 @@
+/home/alexander/ownCloud/a.popov/C#/ap_discovery/bin/Debug/net5.0/linux-x64/publish/ap_discovery.pdb
+/home/alexander/ownCloud/a.popov/C#/ap_discovery/bin/Debug/net5.0/linux-x64/publish/ap_discovery

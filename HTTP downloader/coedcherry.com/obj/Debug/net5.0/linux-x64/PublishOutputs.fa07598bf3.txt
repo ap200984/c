@@ -1,0 +1,2 @@
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/linux-x64/publish/coedcherry.com.pdb
+/home/alexander/C#/HTTP downloader/coedcherry.com/bin/Debug/net5.0/linux-x64/publish/coedcherry.com

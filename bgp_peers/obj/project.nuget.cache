@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "FK93HGpaDQW7vnOOqxQqK4JT4IKGOKGFgiDcL+IKgtmHMOr1t8cIKmwxnbz6skm5vQiESmiaHuBLt8d0DXCsVA==",
+  "success": true,
+  "projectFilePath": "/home/alexander/ownCloud/a.popov/C#/bgp_peers/bgp_peers.csproj",
+  "expectedPackageFiles": [
+    "/home/alexander/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/home/alexander/.nuget/packages/ssh.net/2020.0.1/ssh.net.2020.0.1.nupkg.sha512",
+    "/home/alexander/.nuget/packages/sshnet.security.cryptography/1.3.0/sshnet.security.cryptography.1.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

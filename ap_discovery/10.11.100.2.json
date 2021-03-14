@@ -1,0 +1,303 @@
+[
+	{
+"{#MAC}": "04:18:D6:0E:E5:D8",
+"{#NAME}": "ST_PECH_100",
+"{#LASTIP}": "10.11.100.14",
+"{#ASSOCID}": 1,
+"{#APREPEATER}": 0,
+"{#TX}": 144.444,
+"{#RX}": 144.444,
+"{#SIGNAL}": -61,
+"{#RSSI}": 35,
+"{#CHAINRSSI}": [34, 29],
+"{#RX_CHAINMASK}": 3,
+"{#CCQ}": 99,
+"{#IDLE}": 0,
+"{#TX_LATENCY}": 1,
+"{#UPTIME}": 151829,
+"{#ACK}": 25,
+"{#DISTANCE}": 472,
+"{#TXPOWER}": 27,
+"{#NOISEFLOOR}": -100,
+"{#TX_RATEDATA}":[0,0,0,0,0,0,0,0],
+"{#AIRMAX}": {
+	"{#PRIORITY}": 2,
+	"{#QUALITY}": 96,
+	"{#BEAM}": 255,
+	"{#SIGNAL}": -52,
+	"{#CAPACITY}": 90
+		},
+"{#STATS}": {
+	"{#RX_DATA}": 1449679,
+	"{#RX_BYTES}": 225129937,
+	"{#RX_PPS}": 6,
+	"{#TX_DATA}": 2448131,
+	"{#TX_BYTES}": 2179722702,
+	"{#TX_PPS}": 3
+		},
+"{#RATES}": ["MCS0","MCS1","MCS2","MCS3","MCS4","MCS5","MCS6","MCS7","MCS8","MCS9","MCS10","MCS11","MCS12","MCS13","MCS14","MCS15"
+		],
+"{#SIGNALS}": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-61
+		],
+"{#REMOTE}": {
+	"{#VERSION}": "XW.AR934X.V6.3.2.33267.200715.1627",
+	"{#UPTIME}": 957738,
+	"{#HOSTNAME}": "ST_PECH_100",
+	"{#PLATFORM}": "POWERBEAM M5 300",
+	"{#SIGNAL}": -51,
+	"{#TX_POWER}": 10,
+	"{#RSSI}": 45,
+	"{#CHAINRSSI}": [44, 44],
+	"{#TX_LATENCY}": 1,
+	"{#RX_CHAINMASK}": 3,
+	"{#NOISEFLOOR}": -103,
+	"{#DISTANCE}": 300,
+	"{#TX_RATEDATA}":[0,0,0,0,0,98,98,123],
+	"{#TIME}": "2020-12-21 18:48:40",
+	"{#CPULOAD}": 1,
+	"{#TOTALRAM}": 62136,
+	"{#FREERAM}": 41284,
+	"{#NETROLE}": "BRIDGE",
+	"{#TX_BYTES}": 1605853112,
+	"{#RX_BYTES}": 3271849461,
+	"{#CCQ}": 0,
+	"{#ETHLIST}": [
+				{
+			"{#IFNAME}": "ETH0",
+			"{#ENABLED}":"TRUE",
+			"{#PLUGGED}":"TRUE",
+			"{#DUPLEX}":"TRUE",
+			"{#SPEED}": 100,
+			"{#SNR}":[0,0,0,0],
+			"{#CABLE_LEN}": -1
+				}
+			]
+		}
+	},
+	{
+"{#MAC}": "04:18:D6:0E:E1:AA",
+"{#NAME}": "ST_SHEV_11",
+"{#LASTIP}": "10.11.100.13",
+"{#ASSOCID}": 2,
+"{#APREPEATER}": 0,
+"{#TX}": 144.444,
+"{#RX}": 144.444,
+"{#SIGNAL}": -65,
+"{#RSSI}": 31,
+"{#CHAINRSSI}": [31, 25],
+"{#RX_CHAINMASK}": 3,
+"{#CCQ}": 99,
+"{#IDLE}": 0,
+"{#TX_LATENCY}": 1,
+"{#UPTIME}": 151829,
+"{#ACK}": 28,
+"{#DISTANCE}": 945,
+"{#TXPOWER}": 27,
+"{#NOISEFLOOR}": -100,
+"{#TX_RATEDATA}":[0,0,0,0,0,0,0,0],
+"{#AIRMAX}": {
+	"{#PRIORITY}": 2,
+	"{#QUALITY}": 92,
+	"{#BEAM}": 255,
+	"{#SIGNAL}": -63,
+	"{#CAPACITY}": 90
+		},
+"{#STATS}": {
+	"{#RX_DATA}": 48092554,
+	"{#RX_BYTES}": 5802577683,
+	"{#RX_PPS}": 583,
+	"{#TX_DATA}": 72307917,
+	"{#TX_BYTES}": 34258835884,
+	"{#TX_PPS}": 1203
+		},
+"{#RATES}": ["MCS0","MCS1","MCS2","MCS3","MCS4","MCS5","MCS6","MCS7","MCS8","MCS9","MCS10","MCS11","MCS12","MCS13","MCS14","MCS15"
+		],
+"{#SIGNALS}": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,-66,-65
+		],
+"{#REMOTE}": {
+	"{#VERSION}": "XW.AR934X.V6.3.2.33267.200715.1627",
+	"{#UPTIME}": 448144,
+	"{#HOSTNAME}": "ST_SHEV_11",
+	"{#PLATFORM}": "POWERBEAM M5 300",
+	"{#SIGNAL}": -57,
+	"{#TX_POWER}": 18,
+	"{#RSSI}": 39,
+	"{#CHAINRSSI}": [36, 36],
+	"{#TX_LATENCY}": 1,
+	"{#RX_CHAINMASK}": 3,
+	"{#NOISEFLOOR}": -103,
+	"{#DISTANCE}": 900,
+	"{#TX_RATEDATA}":[61,26,26,120,120,3537,3537,8792],
+	"{#TIME}": "2020-12-21 17:48:40",
+	"{#CPULOAD}": 8.9,
+	"{#TOTALRAM}": 62136,
+	"{#FREERAM}": 41188,
+	"{#NETROLE}": "BRIDGE",
+	"{#TX_BYTES}": 583229106,
+	"{#RX_BYTES}": 450103187,
+	"{#CCQ}": 0,
+	"{#ETHLIST}": [
+				{
+			"{#IFNAME}": "ETH0",
+			"{#ENABLED}":"TRUE",
+			"{#PLUGGED}":"TRUE",
+			"{#DUPLEX}":"TRUE",
+			"{#SPEED}": 100,
+			"{#SNR}":[0,0,0,0],
+			"{#CABLE_LEN}": -1
+				}
+			]
+		}
+	},
+	{
+"{#MAC}": "44:D9:E7:78:F9:80",
+"{#NAME}": "ST_LES_98",
+"{#LASTIP}": "10.11.100.21",
+"{#ASSOCID}": 3,
+"{#APREPEATER}": 0,
+"{#TX}": 144.444,
+"{#RX}": 144.444,
+"{#SIGNAL}": -63,
+"{#RSSI}": 33,
+"{#CHAINRSSI}": [33, 25],
+"{#RX_CHAINMASK}": 3,
+"{#CCQ}": 99,
+"{#IDLE}": 1,
+"{#TX_LATENCY}": 1,
+"{#UPTIME}": 151829,
+"{#ACK}": 26,
+"{#DISTANCE}": 630,
+"{#TXPOWER}": 27,
+"{#NOISEFLOOR}": -100,
+"{#TX_RATEDATA}":[0,0,0,0,0,0,0,0],
+"{#AIRMAX}": {
+	"{#PRIORITY}": 1,
+	"{#QUALITY}": 93,
+	"{#BEAM}": 255,
+	"{#SIGNAL}": -56,
+	"{#CAPACITY}": 87
+		},
+"{#STATS}": {
+	"{#RX_DATA}": 4541640,
+	"{#RX_BYTES}": 1092602453,
+	"{#RX_PPS}": 2,
+	"{#TX_DATA}": 6639495,
+	"{#TX_BYTES}": 6861358765,
+	"{#TX_PPS}": 1
+		},
+"{#RATES}": ["MCS0","MCS1","MCS2","MCS3","MCS4","MCS5","MCS6","MCS7","MCS8","MCS9","MCS10","MCS11","MCS12","MCS13","MCS14","MCS15"
+		],
+"{#SIGNALS}": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-63
+		],
+"{#REMOTE}": {
+	"{#VERSION}": "XW.AR934X.V6.3.2.33267.200715.1627",
+	"{#UPTIME}": 957782,
+	"{#HOSTNAME}": "ST_LES_98",
+	"{#PLATFORM}": "POWERBEAM M5 300",
+	"{#SIGNAL}": -55,
+	"{#TX_POWER}": 15,
+	"{#RSSI}": 41,
+	"{#CHAINRSSI}": [41, 41],
+	"{#TX_LATENCY}": 1,
+	"{#RX_CHAINMASK}": 3,
+	"{#NOISEFLOOR}": -103,
+	"{#DISTANCE}": 600,
+	"{#TX_RATEDATA}":[123,76,76,128,128,8488,8488,9928],
+	"{#TIME}": "2020-12-21 18:48:40",
+	"{#CPULOAD}": 3,
+	"{#TOTALRAM}": 62136,
+	"{#FREERAM}": 41600,
+	"{#NETROLE}": "BRIDGE",
+	"{#TX_BYTES}": 673889526,
+	"{#RX_BYTES}": 899293567,
+	"{#CCQ}": 0,
+	"{#ETHLIST}": [
+				{
+			"{#IFNAME}": "ETH0",
+			"{#ENABLED}":"TRUE",
+			"{#PLUGGED}":"TRUE",
+			"{#DUPLEX}":"TRUE",
+			"{#SPEED}": 100,
+			"{#SNR}":[0,0,0,0],
+			"{#CABLE_LEN}": -1
+				}
+			]
+		}
+	},
+	{
+"{#MAC}": "44:D9:E7:56:53:96",
+"{#NAME}": "ST_MOZD_19",
+"{#LASTIP}": "10.11.100.18",
+"{#ASSOCID}": 4,
+"{#APREPEATER}": 0,
+"{#TX}": 144.444,
+"{#RX}": 78.000,
+"{#SIGNAL}": -60,
+"{#RSSI}": 36,
+"{#CHAINRSSI}": [35, 31],
+"{#RX_CHAINMASK}": 3,
+"{#CCQ}": 99,
+"{#IDLE}": 0,
+"{#TX_LATENCY}": 2,
+"{#UPTIME}": 151829,
+"{#ACK}": 25,
+"{#DISTANCE}": 472,
+"{#TXPOWER}": 27,
+"{#NOISEFLOOR}": -100,
+"{#TX_RATEDATA}":[0,0,0,0,0,0,0,0],
+"{#AIRMAX}": {
+	"{#PRIORITY}": 2,
+	"{#QUALITY}": 83,
+	"{#BEAM}": 255,
+	"{#SIGNAL}": -57,
+	"{#CAPACITY}": 69
+		},
+"{#STATS}": {
+	"{#RX_DATA}": 24847720,
+	"{#RX_BYTES}": 5316542415,
+	"{#RX_PPS}": 3,
+	"{#TX_DATA}": 37918521,
+	"{#TX_BYTES}": 48915087103,
+	"{#TX_PPS}": 1
+		},
+"{#RATES}": ["MCS0","MCS1","MCS2","MCS3","MCS4","MCS5","MCS6","MCS7","MCS8","MCS9","MCS10","MCS11","MCS12","MCS13","MCS14","MCS15"
+		],
+"{#SIGNALS}": [0,0,0,0,0,0,0,0,0,0,0,-61,-60,0,0,0
+		],
+"{#REMOTE}": {
+	"{#VERSION}": "XW.AR934X.V6.3.2.33267.200715.1627",
+	"{#UPTIME}": 957769,
+	"{#HOSTNAME}": "ST_MOZD_19",
+	"{#PLATFORM}": "POWERBEAM M5 300",
+	"{#SIGNAL}": -55,
+	"{#TX_POWER}": 20,
+	"{#RSSI}": 41,
+	"{#CHAINRSSI}": [41, 41],
+	"{#TX_LATENCY}": 1,
+	"{#RX_CHAINMASK}": 3,
+	"{#NOISEFLOOR}": -104,
+	"{#DISTANCE}": 450,
+	"{#TX_RATEDATA}":[0,0,0,0,0,38697,38697,6347233],
+	"{#TIME}": "2020-12-21 18:48:40",
+	"{#CPULOAD}": 3,
+	"{#TOTALRAM}": 62136,
+	"{#FREERAM}": 41064,
+	"{#NETROLE}": "BRIDGE",
+	"{#TX_BYTES}": 685293159,
+	"{#RX_BYTES}": 2016686451,
+	"{#CCQ}": 0,
+	"{#ETHLIST}": [
+				{
+			"{#IFNAME}": "ETH0",
+			"{#ENABLED}":"TRUE",
+			"{#PLUGGED}":"TRUE",
+			"{#DUPLEX}":"TRUE",
+			"{#SPEED}": 100,
+			"{#SNR}":[0,0,0,0],
+			"{#CABLE_LEN}": -1
+				}
+			]
+		}
+	}
+]
+

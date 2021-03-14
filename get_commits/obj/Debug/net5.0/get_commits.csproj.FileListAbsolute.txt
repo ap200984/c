@@ -1,0 +1,16 @@
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/get_commits
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/get_commits.deps.json
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/get_commits.runtimeconfig.json
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/get_commits.runtimeconfig.dev.json
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/get_commits.dll
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/ref/get_commits.dll
+/home/apopov/ownCloud/a.popov/C#/get_commits/bin/Debug/net5.0/get_commits.pdb
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.csprojAssemblyReference.cache
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.GeneratedMSBuildEditorConfig.editorconfig
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.AssemblyInfoInputs.cache
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.AssemblyInfo.cs
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.csproj.CoreCompileInputs.cache
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.dll
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/ref/get_commits.dll
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.pdb
+/home/apopov/ownCloud/a.popov/C#/get_commits/obj/Debug/net5.0/get_commits.genruntimeconfig.cache

@@ -1,0 +1,2 @@
+/home/apopov/ownCloud/a.popov/C#/st_traversal/bin/Debug/net5.0/linux-x64/publish/st_traversal.pdb
+/home/apopov/ownCloud/a.popov/C#/st_traversal/bin/Debug/net5.0/linux-x64/publish/st_traversal

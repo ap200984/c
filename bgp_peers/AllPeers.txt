@@ -1,0 +1,45 @@
+vtysh -c "sh ip bgp neighbor" | grep "BGP neighbor is\|BGP state\|Description\|accepted prefixes"
+BGP neighbor is 10.19.255.2, remote AS 65009, local AS 65019, external link
+ Description: d24
+  BGP state = Established, up for 01:59:19
+  14 accepted prefixes
+BGP neighbor is 10.19.255.3, remote AS 65010, local AS 65019, external link
+ Description: m38
+  BGP state = Established, up for 01:59:13
+  14 accepted prefixes
+BGP neighbor is 10.19.255.4, remote AS 65011, local AS 65019, external link
+ Description: br9
+  BGP state = Established, up for 01:59:04
+  14 accepted prefixes
+BGP neighbor is 10.19.255.5, remote AS 65012, local AS 65019, external link
+ Description: kan
+  BGP state = Established, up for 00:36:03
+  1 accepted prefixes
+BGP neighbor is 10.19.255.6, remote AS 65013, local AS 65019, external link
+ Description: kulesh
+  BGP state = Established, up for 01:59:07
+  1 accepted prefixes
+BGP neighbor is 10.19.255.7, remote AS 65014, local AS 65019, external link
+ Description: mich
+  BGP state = Established, up for 01:58:59
+  14 accepted prefixes
+BGP neighbor is 10.19.255.8, remote AS 65015, local AS 65019, external link
+ Description: Zoo
+  BGP state = Established, up for 01:58:57
+  14 accepted prefixes
+BGP neighbor is 10.19.255.9, remote AS 65016, local AS 65019, external link
+ Description: azov
+  BGP state = Established, up for 01:58:58
+  1 accepted prefixes
+BGP neighbor is 10.19.255.10, remote AS 65017, local AS 65019, external link
+ Description: pol280
+  BGP state = Established, up for 01:59:05
+  1 accepted prefixes
+BGP neighbor is 10.19.255.11, remote AS 65018, local AS 65019, external link
+ Description: sh209
+  BGP state = Established, up for 01:59:08
+  14 accepted prefixes
+BGP neighbor is 10.20.254.1, remote AS 65020, local AS 65019, external link
+ Description: VDS2
+  BGP state = Established, up for 01:59:51
+  14 accepted prefixes
